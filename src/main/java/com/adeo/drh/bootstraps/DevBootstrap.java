@@ -1,5 +1,6 @@
 package com.adeo.drh.bootstraps;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,20 +28,26 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		initData();
+		
+	}
+
+	protected void initData() {
 		Book tartuffe=new Book("1234555NG","tartuffe");
-		HashSet<Book> books=new HashSet<>();
-		books.add(tartuffe);
-		
 		Author moliere=new Author("moliere", "jean-baptiste");
-		Set<Author> authors=new HashSet<>();
-		authors.add(moliere);
-		
+		tartuffe.getAuthors().add(moliere);
+		moliere.getBooks().add(tartuffe);
 		// bidirectionnal relationships
-		tartuffe.setAuthors(authors);
-		moliere.setBooks(books);		
 		authorRepository.save(moliere);
 		bookRepository.save(tartuffe);
 		
+		Book germinal=new Book("5566655NG","germinal");
+		Author victorHugo=new Author("moliere", "jean-baptiste");
+		germinal.getAuthors().add(victorHugo);
+		victorHugo.getBooks().add(germinal);
+		// bidirectionnal relationships
+		authorRepository.saveAll(Arrays.asList(moliere,victorHugo));
+		bookRepository.saveAll(Arrays.asList(tartuffe,germinal));
 	}
 
 }
