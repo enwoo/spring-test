@@ -11,9 +11,11 @@ import javax.persistence.ManyToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(exclude={"books"})
+@ToString(exclude={"books"})
 @Entity
 public class Author {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)

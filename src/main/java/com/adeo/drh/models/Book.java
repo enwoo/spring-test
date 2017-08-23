@@ -11,20 +11,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(exclude={"authors"})
+@EqualsAndHashCode(exclude={"authors","publisher"})
+@ToString(exclude={"authors","publisher"})
 @Entity
 public class Book {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String isbn;
 	private String title;
-	@OneToOne
+	@ManyToOne
 	private Publisher publisher;
 	
 	@ManyToMany
