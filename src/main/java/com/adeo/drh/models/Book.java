@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,20 +24,25 @@ public class Book {
 	private Long id;
 	private String isbn;
 	private String title;
+	@OneToOne
+	private Publisher publisher;
+	
 	@ManyToMany
 	@JoinTable(name="author_book",joinColumns={@JoinColumn(name="book_id")},inverseJoinColumns= {@JoinColumn(name="author_id")})
 	private Set<Author> authors=new HashSet<>();
 	
 	protected Book() {};
 	
-	public Book(String isbn, String title) {
+	public Book(String isbn, String title, Publisher publisher) {
 		this.isbn=isbn;
 		this.title=title;
+		this.publisher=publisher;
 	}
 	
-	public Book(String isbn, String title,Set<Author> authors) {
+	public Book(String isbn, String title, Publisher publisher, Set<Author> authors) {
 		this.isbn=isbn;
 		this.title=title;
 		this.authors=authors;
+		this.publisher=publisher;
 	}
 }
