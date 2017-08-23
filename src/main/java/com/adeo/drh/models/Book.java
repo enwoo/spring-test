@@ -1,4 +1,4 @@
-package com.adeo.drh.model;
+package com.adeo.drh.models;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +23,7 @@ public class Book {
 	private Long id;
 	private String isbn;
 	private String title;
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name="author_book",joinColumns={@JoinColumn(name="book_id")},inverseJoinColumns= {@JoinColumn(name="author_id")})
 	private Set<Author> authors=new HashSet<>();
 	

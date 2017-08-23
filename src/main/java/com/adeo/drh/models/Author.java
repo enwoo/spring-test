@@ -1,9 +1,8 @@
-package com.adeo.drh.model;
+package com.adeo.drh.models;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +20,7 @@ public class Author {
 	private Long id;
 	private String name;
 	private String firstname;
-	@ManyToMany(mappedBy="authors", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="authors")
 	private Set<Book> books=new HashSet<>();
 	
 	// for orm
