@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,18 +14,22 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(exclude={"authors","publisher"})
+@EqualsAndHashCode(of={"isbn"})
 @ToString(exclude={"authors","publisher"})
 @Entity
 public class Book {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Version
+	private Integer version;
+	@Column(unique=true,updatable=false,nullable=false)
 	private String isbn;
 	private String title;
 	@ManyToOne

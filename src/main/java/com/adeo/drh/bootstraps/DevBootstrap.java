@@ -54,7 +54,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		Book germinal=new Book("5566655NG","germinal",hachette);
 		hachette.getBooks().add(germinal);
-		Author victorHugo=new Author("moliere", "jean-baptiste");
+		Author victorHugo=new Author("victor", "hugo");
 		germinal.getAuthors().add(victorHugo);
 		victorHugo.getBooks().add(germinal);
 		// bidirectionnal relationships
